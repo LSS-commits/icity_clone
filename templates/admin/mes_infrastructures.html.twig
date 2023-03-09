@@ -1,0 +1,248 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Infrastructures
+{% endblock %}
+
+{% block body %}
+	{% block recherche %}
+		{# recherche categories, mot clé et arrondissement #}
+		{% include "recherche.html.twig" %}
+	{% endblock %}
+	
+	<div class="container-fluid">
+		<div style="padding: 10px; margin-top: 40px;">
+			<h1 class="text-center">Mes Infrastructures</h1>
+		</div>
+		{% block filtrecat %}
+			{% if (mesinfrascats != true) and (infrastructures != true) %}
+				{% else %}
+					<section class="text-center">
+						<form action="" method="GET">
+							<p>Filtrer par catégorie</p>
+							<button type="button" class="btn btn-light" style="background-color: white;">
+								<a href="{{ path('admin_mes_infrastructures') }}" class="card-link" style="color: #023047;">Afficher tout
+									<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-filter-square-fill" viewbox="0 0 16 16">
+										<path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm.5 5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1 0-1zM4 8.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm2 3a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5z"/>
+									</svg>
+								</a>
+							</button>
+							{% for categorie in categories %}
+								<button type="submit" name="filtrerCategorie" value="{{ categorie.slug }}" class="btn btn-light" style="background-color: white;"><img src="{{ asset('uploads/' ~ categorie.image)}}" alt=""></button>
+							{% endfor %}
+						</form>
+					</section>
+			{% endif %}
+		{% endblock %}
+
+		{# Affichage bouton-lien ajouter infra et infras #}
+		{# Bouton-lien Ajouter Infra #}
+		<div class="d-flex justify-content-center">
+			<div class="text-center" style="margin-top: 2em; margin-bottom: 2em; padding-top: 1em; width: 10em; border-radius: 7px; background-color: #023047;">
+				<a href="{{ path('infrastructure_new') }}" class="card-link" >
+					<svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" fill="currentColor" class="bi bi-plus-square" viewbox="0 0 16 16" >
+						<path style="color: #ffb703;" d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+						<path style="color: white;" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>
+					<p style="margin-top: 1em;">
+						<small class="text-uppercase" style="font-weight: bold; color: white;">Ajouter</small>
+					</p>
+				</a>
+			</div>
+		</div>
+
+		{# Affichage des infras #}
+		{% if filtrerCategorie == true %}
+			{# Si infras filtrées par catégorie #}
+			<div class="row row-cols-1 row-cols-md-4">
+				{% for infrastructure in mesinfrascats %}
+					<div class="col mb-5">
+						<div class="card h-100" style="margin: 0.3em; padding: 0.6em; border: 1px #023047 solid; border-radius:3px">
+							{% if infrastructure.image %}
+								<img class="card-img top rounded" src="{{ asset('uploads/200x200-' ~ infrastructure.image ) }}" alt="image">
+							{% else %}
+								<img class="card-img top rounded" src="{{ asset('images/icityimage.png')}}" alt="image">
+							{% endif %}
+							<div class="card-body">
+								<h5 class="card-title" style="color:#ffb703; font-weight:bold">{{ infrastructure.nom }}</h5>
+								<address class="card-text" style="color:#020347">
+									{{ infrastructure.rue }}
+									{{ infrastructure.codePostal }}
+									{{ infrastructure.ville }}
+								</address>
+								{% if infrastructure.horaires %}
+									<p class="card-text " style="color:#020347">
+										Horaires :
+										{{ infrastructure.horaires }}</p>
+								{% else %}
+									<p class="card-text" style="color:#020347">
+										Horaires : non renseignées</p>
+								{% endif %}
+								{% if infrastructure.telephone %}
+									<p class="card-text" style="color:#020347">
+										Téléphone :
+										{{ infrastructure.telephone }}</p>
+								{% else %}
+									<p class="card-text" style="color:#020347">
+										Téléphone : non renseigné</p>
+								{% endif %}
+								{% if infrastructure.email %}
+									<p class="card-text" style="color:#020347">
+										Email :
+										{{ infrastructure.email }}</p>
+								{% else %}
+									<p class="card-text" style="color:#020347">
+										Email : non renseigné</p>
+								{% endif %}
+								{% if infrastructure.siteWeb %}
+									<p class="card-text" style="color:#020347">Site web :
+										<a target="_blank" style="color: #ffb703" href="{{ infrastructure.siteWeb }}">
+											{{ infrastructure.siteWeb }}</a>
+									</p>
+								{% else %}
+									<p class="card-text" style="color:#020347">Site web : non renseigné</p>
+								{% endif %}
+								<p class="card-text" style="color:#020347">Ajouté le :
+									{{ infrastructure.dateCreation|date('d/m/Y H:i') }}</p>
+								<p class="card-text" style="color:#020347">Ajouté par :
+									{{ infrastructure.utilisateur.pseudo }}</p>
+							</div>
+							{# Boutons #}
+							{# Bouton Modifier #}
+							<div class="text-center">
+								<button type="button" class="btn btn-outline-warning btn-block">
+									<a href="{{ path('infrastructure_edit', {'id': infrastructure.id}) }}" class="card-link" style="color: black">
+										<strong>Modifier</strong>
+									</a>
+								</button>
+								{# Bouton Supprimer #}
+								<form method="post" action="{{ path('infrastructure_delete', {'id': infrastructure.id}) }}" onsubmit="return confirm('Confirmer la suppression ?');">
+									<input type="hidden" name="_method" value="DELETE">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ infrastructure.id) }}">
+									<button class="btn btn-warning btn-block" style="margin-top:1em;">
+										<a class="card-link" style="color:black">
+											<strong>Supprimer</strong>
+										</a>
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		{% elseif infrastructures == true %}
+			{# Toutes les infras de l'utilisateur non filtrées #}
+			<div class="row row-cols-1 row-cols-md-4">
+				{% for infrastructure in infrastructures %}
+					<div class="col mb-5">
+						<div class="card h-100" style="margin: 0.3em; padding: 0.6em; border: 1px #023047 solid; border-radius:3px">
+							{% if infrastructure.image %}
+								<img class="card img top rounded" src="{{ asset('uploads/200x200-' ~ infrastructure.image ) }}" alt="image">
+							{% else %}
+								<img class="card img top rounded" src="{{ asset('images/icityimage.png')}}" alt="image">
+							{% endif %}
+							<div class="card-body">
+								<h5 class="card-title" style="color:#ffb703; font-weight:bold">{{ infrastructure.nom }}</h5>
+								<address class="card-text" style="color:#020347">
+									{{ infrastructure.rue }}
+									{{ infrastructure.codePostal }}
+									{{ infrastructure.ville }}
+								</address>
+								{% if infrastructure.horaires %}
+									<p class="card-text " style="color:#020347">
+										Horaires :
+										{{ infrastructure.horaires }}</p>
+								{% else %}
+									<p class="card-text" style="color:#020347">
+										Horaires : non renseignées</p>
+								{% endif %}
+								{% if infrastructure.telephone %}
+									<p class="card-text" style="color:#020347">
+										Téléphone :
+										{{ infrastructure.telephone }}</p>
+								{% else %}
+									<p class="card-text" style="color:#020347">
+										Téléphone : non renseigné</p>
+								{% endif %}
+								{% if infrastructure.email %}
+									<p class="card-text" style="color:#020347">
+										Email :
+										{{ infrastructure.email }}</p>
+								{% else %}
+									<p class="card-text" style="color:#020347">
+										Email : non renseigné</p>
+								{% endif %}
+								{% if infrastructure.siteWeb %}
+									<p class="card-text" style="color:#020347">Site web :
+										<a target="_blank" style="color: #ffb703" href="{{ infrastructure.siteWeb }}">
+											{{ infrastructure.siteWeb }}</a>
+									</p>
+								{% else %}
+									<p class="card-text" style="color:#020347">Site web : non renseigné</p>
+								{% endif %}
+								<p class="card-text" style="color:#020347">Ajouté le :
+									{{ infrastructure.dateCreation|date('d/m/Y H:i') }}</p>
+								<p class="card-text" style="color:#020347">Ajouté par :
+									{{ infrastructure.utilisateur.pseudo }}</p>
+							</div>
+							{# Boutons #}
+							{# Bouton Modifier #}
+							<div class="text-center">
+								<button type="button" class="btn btn-outline-warning btn-block">
+									<a href="{{ path('infrastructure_edit', {'id': infrastructure.id}) }}" class="card-link" style="color: black">
+										<strong>Modifier</strong>
+									</a>
+								</button>
+								{# Bouton Supprimer #}
+								<form method="post" action="{{ path('infrastructure_delete', {'id': infrastructure.id}) }}" onsubmit="return confirm('Confirmer la suppression ?');">
+									<input type="hidden" name="_method" value="DELETE">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ infrastructure.id) }}">
+									<button class="btn btn-warning btn-block" style="margin-top:1em;">
+										<a class="card-link" style="color:black">
+											<strong>Supprimer</strong>
+										</a>
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		{% else %}
+			<div class="d-flex justify-content-center">
+				<div class="card text-center" style="margin: 0.3em; padding: 0.6em; border: 1px solid #023047 ; border-radius:3px">
+					<div class="card-body">
+						<h5 class="card-title">Vous n'avez pas encore ajouté d'infrastructures...</h5>
+						<p class="card-text" style="color: #023047; font-weight: bold;">Cliquez sur le bouton
+							<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-plus-square" viewbox="0 0 16 16">
+								<path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+								<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>
+							pour contribuer !
+						</p>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+	<div class="container-fluid">
+		<nav class="d-flex justify-content-center" aria-label="...">
+			<ul class="pagination">
+				<li class="page-item disabled">
+					<a class="page-link" href="" tabindex="-1" style="color: #023047;">Précédent</a>
+				</li>
+				<li class="page-item active">
+					<a class="page-link" href="" style="color: #023047;">1</a>
+					<span class="sr-only" style="color: #ffb703;">(current)</span>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="" style="color: #023047;">2
+					</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="" style="color: #023047;">3</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="" style="color: #023047;">Next</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+{% endblock %}

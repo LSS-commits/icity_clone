@@ -1,0 +1,17 @@
+.carte2 #mapid {width: 600px; height: 400px;}
+
+#search::placeholder {
+    color: white;
+    text-align: center;
+}
+
+#recherche{
+    background-image:url(../images/image_fond.jpg) ;
+    padding: 30px;
+    background-size: cover;
+    background-position: center;
+}
+
+.card-img-top{
+    width: 10px;
+}

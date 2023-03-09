@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateur {% endblock %}
+
+{% block body %}
+    <h1 class="text-center" style="margin-top:3em; margin-bottom:2em">Utilisateur {{ utilisateur.pseudo }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ utilisateur.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ utilisateur.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ utilisateur.roles ? utilisateur.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ utilisateur.password }}</td>
+            </tr>
+            <tr>
+                <th>Pseudo</th>
+                <td>{{ utilisateur.pseudo }}</td>
+            </tr>
+            <tr>
+                <th>DateInscription</th>
+                <td>{{ utilisateur.dateInscription ? utilisateur.dateInscription|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Rgpd</th>
+                <td>{{ utilisateur.rgpd ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>IsVerified</th>
+                <td>{{ utilisateur.isVerified ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+<div><a href="{{ path('utilisateur_index') }}">Revenir à la liste</a></div>
+<div> <a href="{{ path('utilisateur_edit', {'id': utilisateur.id}) }}">Modifier</a></div>
+
+   
+
+    {{ include('utilisateur/_delete_form.html.twig') }}
+{% endblock %}

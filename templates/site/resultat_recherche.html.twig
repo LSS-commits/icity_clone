@@ -1,0 +1,169 @@
+{% extends 'parent_public.html.twig' %}
+
+{% block navigation %}
+	{# barre de navigation fixe #}
+	{% include "header.html.twig" %}
+{% endblock %}
+
+
+{% block body %}
+	{% block recherche %}
+		{# recherche categories, mot clé et arrondissement #}
+		{% include "recherche.html.twig" %}
+	{% endblock %}
+
+	<section class="d-flex flex-row-reverse" style="margin-top: 2em">
+
+		{% block carte %}
+			<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+			<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+			<div id="mapid" class="w-50 position-sticky" style="margin-top: 165px; height: 900px; position: sticky; top:50px; "></div>
+
+			<script src="{{ asset('js/scripts-card.js') }}"></script>
+
+		{% endblock %}
+
+		{% block resultat %}
+
+			<section class="container w-50 h-100">
+				<div class="d-flex flex-column align-items-center">
+
+					<h1 class="text-center " style="padding: 3px; margin-bottom: 0.5em; ">Résultat de la recherche</h1>
+
+
+					<div style="margin-bottom: 2em">
+
+						{% for categorie in categories  %}
+							<a href="#">
+								<img src="{{ asset('uploads/' ~ categorie.image ) }}" alt="picto">
+							</a>
+						{%  endfor %}
+					</div>
+
+
+					<section class="justify-content-center">
+
+						{% for infrastructure in infraACM  %}
+
+							<article style="padding: 0.6em;">
+								<div
+									class="d-flex" style=" border: 1px #023047 solid; border-radius:3px " id={{ infrastructure.id }}>
+
+
+									{# Image #}
+									<div class="h-100 w-100 align-self-center">
+										{% if infrastructure.image %}
+											<img class="col card-img rounded" src="{{ asset('uploads/' ~ infrastructure.image ) }}" alt="image" style="padding:10px;">
+										{% else %}
+											<img class="col card-img rounded" src="{{ asset('images/icityimage.png') }}" alt="image" style="padding:10px;">
+										{% endif %}
+									</div>
+
+
+									<div class="col card-body marker" style=" border-radius: 7px;">
+
+
+										<h5 class="card-text">
+											<a style="color:#ffb703; font-weight:bold" class="infrastructure_nom" href="#" onclick="selectInfra({{infrastructure.id}})">{{ infrastructure.nom }}</a>
+
+
+										</h5>
+
+										<address class="card-text" style="color:#020347">
+											<span class="infrastructure_rue">{{ infrastructure.rue }}</span>
+											<span class="infrastructure_code_postal">{{ infrastructure.codePostal }}</span>
+											<span class="infrastructure_ville">{{ infrastructure.ville }}</span>
+
+
+											<input class="infrastructure_id" type="hidden" value="{{ infrastructure.id}}">
+											<input class="infrastructure_latitude" type="hidden" value="{{ infrastructure.latitude}}">
+											<input class="infrastructure_longitude" type="hidden" value="{{ infrastructure.longitude}}">
+
+										</address>
+										<p>
+											<a class="btn" style="background-color: #023047; color:white;;" data-toggle="collapse" href="#collapseExample{{ infrastructure.id}}" role="button" aria-expanded="false" aria-controls="collapseExample{{ infrastructure.id}}">
+
+
+												En savoir plus
+											</a>
+										</p>
+										<div class="collapse" id="collapseExample{{ infrastructure.id}}">
+											<div class="card card-body">
+
+												{% if infrastructure.horaires %}
+													<p class="card-text infrastructure_horaire " style="color:#020347">
+														Horaires :
+														{{ infrastructure.horaires }}</p>
+												{% else %}
+													<p class="card-text" style="color:#020347">
+														Horaires : non renseignées</p>
+												{% endif %}
+
+												{% if infrastructure.telephone %}
+													<p class="card-text" style="color:#020347">
+														Téléphone :
+														{{ infrastructure.telephone }}</p>
+												{% else %}
+													<p class="card-text" style="color:#020347">
+														Téléphone : non renseigné</p>
+												{% endif %}
+
+												{% if infrastructure.email %}
+													<p class="card-text" style="color:#020347">
+														Email :
+														{{ infrastructure.email }}</p>
+												{% else %}
+													<p class="card-text" style="color:#020347">
+														Email : non renseigné</p>
+												{% endif %}
+
+												{% if infrastructure.siteWeb %}
+													<p class="card-text" style="color:#020347">Site web :
+														<a target="_blank" style="color: #ffb703" href="{{ infrastructure.siteWeb }}">
+															{{ infrastructure.siteWeb }}</a>
+													</p>
+												{% else %}
+													<p class="card-text" style="color:#020347">
+														Site web : non renseigné</p>
+												{% endif %}
+
+												<p class="card-text" style="color:#020347">
+													Ajouté le :
+													{{ infrastructure.dateCreation|date('d/m/Y H:i') }}</p>
+
+
+											</div>
+										</div>
+
+
+										{% if is_granted('ROLE_ADMIN')%}
+											<p class="card-text">
+												Ajouté par :
+												<a style="color: #ffb703" href="{{ path('utilisateur_form_delete', {'id': infrastructure.utilisateur.id}) }}">{{ infrastructure.utilisateur.pseudo }}</a>
+											</p>
+										{% else %}
+											<p class="card-text" style="color:#020347">
+												Ajouté par :
+												{{ infrastructure.utilisateur.pseudo }}</p>
+										{% endif %}
+										{% if infrastructure.categories|length > 0 %}
+											{% for categorie in infrastructure.categories %}
+												<p class="infrastructure_categorie">{{ categorie.nom }}</p>
+											{% endfor %}
+										{% endif %}
+
+									</div>
+								</div>
+							</article>
+						{%  endfor %}
+
+
+					</section>
+				</div>
+			</section>
+		{% endblock %}
+
+	</section>
+	<script src="{{ asset('js/recup-result-rech.js') }}"></script>
+{% endblock %}

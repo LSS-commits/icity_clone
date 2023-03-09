@@ -1,0 +1,14 @@
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<div>
+    <div>
+        <p class="" style=" color:#ffb703; font-weight:bold;"> Vérifier la position de votre infrastructure sur la carte
+            avant de valider !</p>
+        <button class="btn text-start " id="btn_go" style="border: 2px solid #023047; color:#023047; font-weight:bold;">
+            Vérifier
+        </button>
+    </div>
+
+    <button class="btn" style="color: white; background-color:#023047; margin-top:3em">{{ button_label|default("Ajouter l'infrastructure") }}</button>
+</div>
+{{ form_end(form) }}

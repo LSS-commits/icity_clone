@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index des catégories
+{% endblock %}
+
+{% block body %}
+	<div style="margin-top: 7em;">
+		<h1 class="text-center" style="margin-bottom: 1em;">Index des catégories</h1>
+		<div class="container-fluid" style="width: 70%;">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nom</th>
+						<th>Image</th>
+						<th>Description</th>
+						<th>Slug</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for categorie in categories %}
+						<tr>
+							<td>{{ categorie.id }}</td>
+							<td>{{ categorie.nom }}</td>
+							<td>{{ categorie.image }}</td>
+							<td>{{ categorie.description }}</td>
+							<td>{{ categorie.slug }}</td>
+							<td>
+								<a href="{{ path('categorie_show', {'id': categorie.id}) }}" style="color:#ffb703; font-weight: bold;">Voir</a>
+								<a href="{{ path('categorie_edit', {'id': categorie.id}) }}" style="color:#ffb703; font-weight: bold;">Modifier</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="6">Pas de catégorie à afficher</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<a href="{{ path('categorie_new') }}" style="color:#ffb703; font-weight: bold;">Créer une nouvelle catégorie</a>
+		</div>
+	</div>
+{% endblock %}

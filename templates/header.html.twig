@@ -1,0 +1,80 @@
+{# barre de navigation fixe #}
+<header>
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023047;">
+		<a class="navbar-brand" href="{{ path('index') }}">
+			<img src="{{asset('images/logo_petit.png')}}" alt="logo" class="img-fluid">
+		</a>
+
+		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+			aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div id="navbarCollapse" class="collapse navbar-collapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" style="color: #fff;" href="{{ path('index') }}">Accueil</a>
+				</li>
+
+				{% if is_granted('ROLE_ADMIN')%}
+				<li class="nav-item active">
+					<a class="nav-link" style="color: #fff;" href="{{ path('admin') }}">Espace admin</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" style="color: #fff;" href="{{ path('infrastructure_new') }}">Ajouter une
+						infrastructure</a>
+				</li>
+				{% elseif is_granted('ROLE_USER')%}
+				<li class="nav-item active">
+					<a class="nav-link" style="color: #fff;" href="{{ path('membre') }}">Espace membre</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" style="color: #fff;" href="{{ path('infrastructure_new_membre') }}">Ajouter une
+						infrastructure</a>
+				</li>
+				{% endif %}
+
+				<li class="nav-item">
+					<a class="nav-link" style="color: #fff;" href="{{ path('contact') }}">Contact</a>
+				</li>
+			</ul>
+
+			<div class="navbar-item-custom d-flex">
+
+				{% if is_granted('ROLE_ADMIN')%}
+
+
+				<a class="nav-link"
+					style="background-color: #fff; color: #000; border: 1px #fff solid; border-radius: 3px; padding: 4px"
+					href="{{ path('app_logout') }}">Déconnexion</a>
+
+
+
+				{% elseif is_granted('ROLE_USER') %}
+
+				<a class="nav-link"
+					style="background-color: #fff; color: #000; border: 1px #fff solid; border-radius: 3px; padding: 4px"
+					href="{{ path('app_logout') }}">Déconnexion</a>
+
+				{% else %}
+
+
+				<a class="nav-link " style="color: #FFB703; border: 1px #fff solid; border-radius: 3px; "
+					href="{{ path('app_login') }}">Connexion</a>
+
+
+				<a class=" nav-link" style="background-color: #fff; color: #000; border: 1px #fff solid; border-radius: 3px; margin-left: 5px "
+					href="{{ path('app_register') }}">Inscription</a>
+
+				{% endif %}
+
+			</div>
+		</div>
+
+
+
+
+
+
+	</nav>
+</header>

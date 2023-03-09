@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modifier l'infrastructure
+{% endblock %}
+
+{% block body %}
+<h1 class="text-center" style="margin-top:3em; margin-bottom:2em">Modifier l'infrastructure</h1>
+
+
+
+	{% block formulaire %}
+
+	<div class=" row mt-1 mt-md-0 mb-md-0">
+
+
+	<section class="col-md-5 mx-auto mt-2 mt-md-0 mb-0 mb-md-5">
+	
+		
+			{{ include('infrastructure/_form3.html.twig') }}
+        	
+			{{ include('infrastructure/_delete_form.html.twig') }}
+	
+			<button class="btn btn-outline-light" style="color: black; font-weight: bold;">
+				<a href="{{ path('admin_mes_infrastructures') }}" style="color: #023047;">Retour</a>
+			</button>
+		
+
+	</section>
+	{% endblock %}
+
+
+	{% block carte %}
+	<section class="col-md-6 mx-auto mt-2 mt-md-0 mb-0 mb-md-6">
+		{% block carte1 %}
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+			integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+			crossorigin="" />
+		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+			integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+			crossorigin=""></script>
+		{% endblock %}
+
+		{% block carte2 %}
+		<div id="mapid" style="width: 600px; height: 1000px;"></div>
+		<script src="{{ asset('js/scripts-card.js') }}"></script>
+		<script src="{{ asset('js/getAddress.js') }}"></script>
+		{% endblock %}
+	</section>
+	</div>
+	{% endblock %}
+
+</div>
+
+{% endblock %}

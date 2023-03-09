@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Infrastructure{% endblock %}
+
+{% block body %}
+    <h1>Infrastructure</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ infrastructure.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ infrastructure.nom }}</td>
+            </tr>
+            <tr>
+                <th>Rue</th>
+                <td>{{ infrastructure.rue }}</td>
+            </tr>
+            <tr>
+                <th>CodePostal</th>
+                <td>{{ infrastructure.codePostal }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ infrastructure.ville }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ infrastructure.latitude }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ infrastructure.longitude }}</td>
+            </tr>
+            
+            <tr>
+                <th>Arrondissement</th>
+                <td>{{ infrastructure.arrondissement }}</td>
+            </tr>
+            <tr>
+                <th>Horaires</th>
+                <td>{{ infrastructure.horaires }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ infrastructure.email }}</td>
+            </tr>
+            <tr>
+                <th>SiteWeb</th>
+                <td>{{ infrastructure.siteWeb }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ infrastructure.image }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('infrastructure_index') }}">back to list</a>
+
+    <a href="{{ path('infrastructure_edit', {'id': infrastructure.id}) }}">Edit</a>
+
+    {{ include('infrastructure/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Catégorie
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid justify-content-center" style="width:70%;">
+		<h1 class="text-center" style="margin-top: 3em;">Créer une nouvelle catégorie</h1>
+		<div class="container-fluid">
+			{{ include('categorie/_form.html.twig') }}
+
+		</div>
+
+		<a href="{{ path('categorie_index') }}" style="padding-left: 15px; font-weight: bold; color:#ffb703">Retour à la liste</a>
+	</div>
+{% endblock %}

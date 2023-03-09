@@ -1,0 +1,180 @@
+{% extends 'parent_public.html.twig' %}
+
+
+{% block recherche %}
+	{# recherche categories, mot clé et arrondissement #}
+	{% include "recherche.html.twig" %}
+{% endblock %}
+
+
+{% block informations %}
+	{# cards pour information sur le site #}
+	<section class="container-fluid" style="width: 90%">
+		<h1 class="text-center" style="margin-top: 2em;">
+			iCity, nos services
+		</h1>
+		<div class="card-group" style="margin-top: 60px; margin-bottom: 50px;">
+			<div class="card text-center" style="margin:20px; border: 0.5px solid #023047; border-radius: 3px;">
+				<h5 class="card-title" style="border-bottom: 2px solid #ffb703;margin:4px; padding: 6px; border-radius:3px">Vous recherchez un lieu ?</h5>
+				<div class="card-body">
+					<p class="card-text">Recherchez des lieux dans Marseille par catégorie, mot-clé, en fonction des arrondissements.</p>
+				</div>
+			</div>
+			<div class="card text-center" style="margin:20px; border: 0.5px solid #023047; border-radius: 3px;">
+				<h5 class="card-title" style="border-bottom: 2px solid #ffb703;  margin:4px; padding: 6px; border-radius:3px">Vous souhaitez faire connaître votre ville ?</h5>
+				<div class="card-body">
+					<p class="card-text">
+						Inscrivez-vous pour partager des infos sur les trésors cachés de "Massilia" !</p>
+				</div>
+			</div>
+			<div class="card text-center" style="margin:20px; border: 0.5px solid #023047; border-radius: 3px;">
+				<h5 class="card-title" style="border-bottom: 2px solid #ffb703; margin:4px; padding: 6px; border-radius:3px">
+					Prochainement !
+				</h5>
+				<div class="card-body">
+					<p class="card-text">De nouvelles fonctionnalités : rechercher et créer des évènements, communiquer avec la communauté grâce à notre chat.
+						<br>
+						Promis, vous ne saurez plus comment vous ennuyer !</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div style="padding-bottom: 60px;">
+		{% if is_granted('ROLE_ADMIN')%}
+			{% elseif is_granted('ROLE_USER')%}
+			{% else %}
+				<div class="text-center">
+					<button class="btn" style="background-color: #ffb703; font-weight: bold; padding: 0.7em 2em 0.7em 2em;" type="submit">Inscrivez-vous !</button>
+				</div>
+		{% endif %}
+	</div>
+	<div class="text-center">
+		<img src="{{ asset('images/ville_marseille7.png')}}" alt="image">
+	</div>
+{% endblock %}
+
+
+{% block categories %}
+	{# présentation des catégories #}
+	<div style="border-top: 4px solid #ffb703; margin-bottom: 100px"></div>
+	<section class="container-fluid" style="width: 90%">
+		<div class="card-group d-flex flex-column">
+			<h1 class="text-center align-content-center" style=" padding: 3px; margin-bottom: 2em;">Nos catégories</h1>
+			<section class="row mt-1 mt-md-0 mb-md-0 justify-content-center">
+
+				{% for categorie in categories  %}
+
+					<article class="d-flex flex-column align-items-center col-md-3 mx-auto mt-2 mt-md-0 mb-0 mb-md-3" style="margin: 0.6em;">
+
+						<div class="col card-body" style="border: 0.5px solid #023047; border-radius: 3px;">
+							<h5 class="card-title d-flex justify-content-between align-items-center" style="border-bottom: 2px solid #ffb703; padding: 0.5em">
+								{{ categorie.nom }}
+								<img src="{{ asset('uploads/' ~ categorie.image ) }}" alt="" style="background-size: cover;">
+							</h5>
+							<p class="card-text text-bottom text-left" style="color:dark;">{{ categorie.description }}</p>
+						</div>
+					</article>
+				{%  endfor %}
+			</section>
+		</section>
+	</div>
+
+	<div style="border-top: 4px solid #ffb703; margin-top: 100px"></div>
+{% endblock %}
+
+
+{% block dernier_ajouts %}
+	{# cards derniers ajout d'infrastructure #}
+	<section class="container-fluid" style="width: 90%">
+		<div class="d-flex flex-column" style="padding: 10px; margin-top: 120px; margin-bottom: 120px;">
+			<h1 class="text-center" style="padding: 3px; margin-bottom: 2em;">Derniers ajouts d'infrastructures</h1>
+
+			<section class="row mt-1 mt-md-0 mb-md-0 justify-content-center">
+
+				{% for infrastructure in infrastructures  %}
+
+					<article class="d-flex flex-column align-items-stretch col-md-3 mx-auto mt-2 mt-md-0 mb-0 mb-md-3" style="padding: 0.6em;">
+						<div
+							class="h-100" style=" border: 1px #023047 solid; border-radius:3px ">
+
+							{# Image #}
+							<div style="width: 100%; margin-top:1em;">
+								{% if infrastructure.image %}
+									<img class="col card-img rounded" src="{{ asset('uploads/' ~ infrastructure.image ) }}" alt="image">
+								{% else %}
+									<img class="col card-img rounded" src="{{ asset('images/icityimage.png') }}" alt="image">
+								{% endif %}
+							</div>
+
+
+							<div class="col card-body" style=" border-radius: 7px;">
+
+								<h5 class="card-text" style="color:#ffb703; font-weight:bold">{{ infrastructure.nom }}</h5>
+
+								<address class="card-text" style="color:#020347">
+									{{ infrastructure.rue }}
+									{{ infrastructure.codePostal }}
+									{{ infrastructure.ville }}
+								</address>
+
+								{% if infrastructure.horaires %}
+									<p class="card-text " style="color:#020347">
+										Horaires :{{ infrastructure.horaires }}</p>
+								{% else %}
+									<p class="card-text" style="color:#020347">
+										Horaires : non renseignées</p>
+								{% endif %}
+
+								{% if infrastructure.telephone %}
+									<p class="card-text" style="color:#020347">
+										Téléphone :
+										{{ infrastructure.telephone }}</p>
+								{% else %}
+									<p class="card-text" style="color:#020347">
+										Téléphone : non renseigné</p>
+								{% endif %}
+
+								{% if infrastructure.email %}
+									<p class="card-text" style="color:#020347">
+										Email :
+										{{ infrastructure.email }}</p>
+								{% else %}
+									<p class="card-text" style="color:#020347">
+										Email : non renseigné</p>
+								{% endif %}
+
+								{% if infrastructure.siteWeb %}
+									<a href="{{ infrastructure.siteWeb }}" class="card-text" style="color:#020347">
+										Site web :
+										{{ infrastructure.siteWeb }}</a>
+								{% else %}
+									<p class="card-text" style="color:#020347">
+										Site web : non renseigné</p>
+								{% endif %}
+
+								<p class="card-text" style="color:#020347">
+									Ajouté le :
+									{{ infrastructure.dateCreation|date('d/m/Y H:i') }}</p>
+
+								{% if is_granted('ROLE_ADMIN')%}
+									<p class="card-text">
+										Ajouté par :
+										<a style="color: #ffb703;" href="{{ path('utilisateur_form_delete', {'id': infrastructure.utilisateur.id}) }}">{{ infrastructure.utilisateur.pseudo }}</a>
+									</p>
+								{% else %}
+									<p class="card-text" style="color:#020347">
+										Ajouté par : {{ infrastructure.utilisateur.pseudo }}</p>
+								{% endif %}
+
+
+							</div>
+
+
+						</div>
+					</article>
+				{%  endfor %}
+			</section>
+		</div>
+	</section>
+
+{% endblock %}

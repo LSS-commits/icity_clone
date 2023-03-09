@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block navigation %}
+	{# barre de navigation fixe #}
+	{% include "header.html.twig" %}
+{% endblock %}
+
+{% block title %}
+	Inscription
+{% endblock %}
+
+
+{% block body %}
+	<div class="container-fluid" style="margin-top: 7em; margin-bottom: 5em; width:70%">
+
+		{% for flashError in app.flashes('verify_email_error') %}
+			<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+		{% endfor %}
+
+		<h1 class="text-center">Formulaire d'inscription</h1>
+
+		{{ form_start(registrationForm) }}
+		{{ form_row(registrationForm.pseudo) }}
+		{{ form_row(registrationForm.email) }}
+		{{ form_row(registrationForm.plainPassword, {
+            label: 'Mot de passe'
+        }) }}
+		{{ form_row(registrationForm.rgpd, {
+            label: 'En cochant cette case et en validant votre inscription, vous acceptez les Conditions Générales d’Utilisation et la Politique de gestion des données personnelles du site.'
+        }) }}
+        
+        <p>Consulter nos pages : </p>
+		<div><a href="{{ path('index') }}">Conditions Générales d’Utilisation</a></div>
+		<div><a href="{{ path('index') }}">Politique de gestion des données personnelles</a></div>
+		<button type="submit" class="btn" style="background-color: #023047; color: white; margin-top: 1em;">S'inscrire</button>
+		{{ form_end(registrationForm) }}
+	</div>
+{% endblock %}

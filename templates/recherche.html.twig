@@ -1,0 +1,56 @@
+<section id="recherche" style="margin-top: 5em">
+	<div class="d-flex justify-content-center">
+		<p class="text-center" style="color: #fff; font-size: 20px; font-weight: bold; background-color: #023047; width: 30%; border-radius: 3px; padding: 3px; color: #ffb703;">Marseille sur le bout des doigts, par iCity</p>
+	</div>
+	<div class="container-fluid">
+		<form action="" method="GET">
+			<div
+				class="row justify-content-between" style=" margin: 40px">
+				{# Recherche par categorie #}
+				<label>
+					<select class="form-control col-md-12 text-center" style="background-color: #023047; color: #fff;" name="categorie" id="categorie">
+						<option value="">Choisissez une catégorie</option>
+						{% for categorie in categories %}
+							<option value="{{ categorie.nom }}">
+								{{ categorie.nom }}
+							</option>
+						{% endfor %}
+					</select>
+				</label>
+
+
+				{# recherche par mot clé #}
+				<label>
+					<input class="form-control col-md-12  text-center" style="background-color: #023047; color: #fff;" type="text" name="mot" placeholder="Que recherchez-vous ?" id="search">
+				</label>
+
+
+				{# recherche par arrondissement #}
+				<label>
+					<select class="form-control col-md-12  text-center" style="background-color: #023047; color: #fff;" name="arrondissement" id="arrondissement">
+						<option value="">Choisissez un arrondissement</option>
+						<option value="1er">1er</option>
+						<option value="2eme">2eme</option>
+						<option value="3eme">3eme</option>
+						<option value="4eme">4eme</option>
+						<option value="5eme">5eme</option>
+						<option value="6eme">6eme</option>
+						<option value="7eme">7eme</option>
+						<option value="8eme">8eme</option>
+						<option value="9eme">9eme</option>
+						<option value="10eme">10eme</option>
+						<option value="11eme">11eme</option>
+						<option value="12eme">12eme</option>
+						<option value="13eme">13eme</option>
+						<option value="14eme">14eme</option>
+						<option value="15eme">15eme</option>
+						<option value="16eme">16eme</option>
+					</select>
+				</label>
+			</div>
+			<div class="text-center">
+				<button class="btn" style="background-color: #ffb703; color: #000; font-weight: bold" type="submit">Envoyer la recherche</button>
+			</div>
+		</form>
+	</div>
+</section>

@@ -1,0 +1,45 @@
+{% extends 'parent_public.html.twig' %}
+
+{% block body %}
+
+{% block informations %}
+<h1 class="text-center" style="margin-top:3em;">Formulaire de contact</h1>
+
+
+<form style="margin:5em;">
+    <div class="mb-3">
+        <label for="nom" class="form-label">Nom</label>
+        <input type="nom" class="form-control" placeholder="Nom">
+    </div>
+    <div class="mb-3">
+        <label for="prenom" class="form-label">Prénom</label>
+        <input type="prenom" class="form-control" placeholder="Prénom">
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" placeholder="nom@example.com">
+    </div>
+    <div class="mb-3">
+        <label for="contenu" class="form-label">Message</label>
+        <textarea class="form-control" rows="3" placeholder="Votre message ici..."></textarea>
+    </div>
+
+
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+            aria-controls="collapseExample" style="background-color:#023047; color:white;">
+            Envoyer
+        </a>
+    </p>
+    <div class="collapse" id="collapseExample"style="color:#ffb703">
+        <p>Merci pour votre message</p>
+    </div>
+
+
+</form>
+
+
+
+{% endblock %}
+
+{% endblock %}

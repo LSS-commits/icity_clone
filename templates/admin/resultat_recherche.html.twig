@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultat de la recherche
+{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+
+<h2>Résultats de la recherche ({{ mot ?? '' }})</h2>
+	<div class="infrastructures">
+		{% for infrastructure in infrastructures %}
+			<article>
+				
+				
+				{% if infrastructure.nom %}
+					<div><img src="{{ asset('uploads/' ~ infrastructure.image) }}" class="img-fluid"></div>
+                    <p>{{ infrastructure.nom }}</p>
+				{% endif %}
+			</article>
+		{% else %}
+			<article>
+				<div>Aucune infrastructure n'a été trouvée</div>
+			</article>
+		{% endfor %}
+	</div>
+
+	
+{% endblock %}

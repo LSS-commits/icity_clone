@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateurs{% endblock %}
+
+{% block body %}
+<div class="container-fluid" style="margin-top: 7em;">
+    <h1 class="text-center" style="margin-top:3em; margin-bottom:2em">Utilisateurs</h1>
+    <div >
+    <table class="table ">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                {# <th>Password</th> #}
+                <th>Pseudo</th>
+                <th>DateInscription</th>
+                <th>Rgpd</th>
+                <th>IsVerified</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for utilisateur in utilisateurs %}
+            <tr>
+                <td>{{ utilisateur.id }}</td>
+                <td>{{ utilisateur.email }}</td>
+                <td>{{ utilisateur.roles ? utilisateur.roles|json_encode : '' }}</td>
+                {# <td>{{ utilisateur.password }}</td> #}
+                <td>{{ utilisateur.pseudo }}</td>
+                <td>{{ utilisateur.dateInscription ? utilisateur.dateInscription|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ utilisateur.rgpd ? 'Yes' : 'No' }}</td>
+                <td>{{ utilisateur.isVerified ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('utilisateur_show', {'id': utilisateur.id}) }}">Voir</a>
+                    <a href="{{ path('utilisateur_edit', {'id': utilisateur.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div> <a href="{{ path('utilisateur_new') }}">Créer un nouveau utilisateur</a></div>
+   <div><a href="{{ path('admin') }}">Revenir</a></div>
+    
+</div>
+    
+</div>
+{% endblock %}

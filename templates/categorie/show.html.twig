@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégorie
+{% endblock %}
+
+{% block body %}
+	<div style="margin-top: 7em;">
+
+		<h1 class="text-center" style="margin-bottom: 1em;">Catégorie</h1>
+		<div class="container-fluid" style="width: 70%;">
+
+			<table class="table">
+				<tbody>
+					<tr>
+						<th>Id</th>
+						<td>{{ categorie.id }}</td>
+					</tr>
+					<tr>
+						<th>Nom</th>
+						<td>{{ categorie.nom }}</td>
+					</tr>
+					<tr>
+						<th>Image</th>
+						<td>{{ categorie.image }}</td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td>{{ categorie.description }}</td>
+					</tr>
+					<tr>
+						<th>Slug</th>
+						<td>{{ categorie.slug }}</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div>
+				<a href="{{ path('categorie_index') }}" style="color:#ffb703; font-weight: bold;">Retour à la liste</a>
+			</div>
+			<div>
+				<a href="{{ path('categorie_edit', {'id': categorie.id}) }}" style="color:#ffb703; font-weight: bold;">Modifier</a>
+			</div>
+			{{ include('categorie/_delete_form.html.twig') }}
+		</div>
+	</div>
+{% endblock %}

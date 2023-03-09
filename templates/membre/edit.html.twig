@@ -1,0 +1,24 @@
+{% extends 'parent_membre.html.twig' %}
+{% block title %}Modifier l'infrastructure
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid" style="margin-top: 6em;">
+		<h1 class="text-center">Modifier l'infrastructure</h1>
+		<div class="d-flex justify-content-center" style="margin-top: 1em;">
+			{{ include('membre/_form.html.twig', {'button_label': 'Modifier'}) }}
+		</div>
+
+
+		<div class="d-flex justify-content-center" style="margin-top: 1em; padding-right: 14.6em;">
+			<div class="row">
+				<div class="col-sm">{{ include('membre/_delete_form.html.twig') }}</div>
+				<div class="col-sm" style="margin-top: 0.05em;">
+					<button class="btn btn-outline-light" style="color: black; font-weight: bold;">
+						<a href="{{ path('membre_mes_infrastructures') }}" style="color: #023047;">Retour</a>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,156 @@
+<footer  style="background-color: #023047">
+
+	<div  style="background-color: #ffb703">
+		<div
+			class="container">
+
+			<!-- Grid row-->
+			<div
+				class="row py-4 d-flex">
+
+				<!-- Grid column -->
+				<div class="col-md-6 col-lg-7 text-center mb-4 mb-md-0" style="color: #000">
+					Restez connecté à votre ville en nous suivant sur nos réseaux sociaux !
+				</div>
+				<!-- Grid column -->
+
+				<!-- Grid column -->
+				<div
+					class="col-md-6 col-lg-5 text-center text-md-right">
+
+					<!-- Facebook -->
+					<a class="fb-ic ml-2 social-icon" href="#">
+						<img src="{{asset('images/facebook.png')}}" alt="facebook" width="40px">
+					</a>
+					<!-- Twitter -->
+					<a class="tw-ic ml-2 social-icon" href="#">
+						<img src="{{asset('images/twitter.png')}}" alt="twitter" width="40px">
+					</a>
+					<!--Linkedin -->
+					<a class="li-ic ml-2 social-icon" href="#">
+						<img src="{{asset('images/linkedin.png')}}" alt="linkedin" width="40px">
+					</a>
+					<!--Instagram-->
+					<a class="ins-ic ml-2 social-icon" href="#">
+						<img src="{{asset('images/instagram.png')}}" alt="instagram" width="40px">
+					</a>
+
+				</div>
+				<!-- Grid column -->
+
+			</div>
+			<!-- Grid row-->
+
+		</div>
+	</div>
+
+	<!-- Footer Links -->
+	<div
+		class="container pt-5 pt-md-6" style="color: #ced4da">
+		<!-- Grid row -->
+		<div
+			class="row mt-1 mt-md-0 mb-md-0">
+
+			
+
+			<!-- Grid column -->
+			<div
+				class="col-md-3 mx-auto mt-3 mt-md-0 mb-0 mb-md-3 text-center" style="color: #ced4da">
+				<!-- Links -->
+				<h5>Liens utiles</h5>
+				<hr class="color-secondary mb-4 mt-0 d-inline-block mx-auto w-60">
+
+				<ul class="list-unstyled">
+					<li class="mb-2 ">
+						{% if is_granted('ROLE_ADMIN')%}
+							<a style="color: #ced4da" href="{{ path('admin') }}">Votre espace</a>
+						{% elseif is_granted('ROLE_USER')%}
+							<a style="color: #ced4da" href="{{ path('membre') }}">Votre espace</a>
+						{% endif %}
+					</li>
+					<li class="mb-2 ">
+						<a style="color: #ced4da" href="#">CGU</a>
+					</li>
+					<li class="mb-2 ">
+						<a style="color: #ced4da" href="#">Mentions Légales</a>
+					</li>
+					<li class="mb-2 ">
+						<a style="color: #ced4da" href="#">Politique gestion des données</a>
+					</li>
+				</ul>
+			</div>
+			<!-- Grid column -->
+
+			<hr
+			class="clearfix w-100 d-md-none">
+
+
+			<div
+				class="col-md-6 mx-auto mt-3 mt-md-0 mb-0 mb-md-6 text-center">
+
+				<!-- Links -->
+				<h5>À propos de nous</h5>
+				<hr class="color-primary mb-4 mt-0 d-inline-block mx-auto w-60">
+				<div>
+					<strong>"Oh peuchère, tu veux savoir keskon fait sur Marseille !"</strong>
+				<div>
+					<p>Nouveau dans la ville ? Vous souhaitez la redécouvrir ? <br> Sur ce site, vous allez pouvoir rechercher des lieux en tous genres. <br> "Mais pas que, fatche de" ! <br> Pour faire connaître les petites pépites de votre quartier, il vous suffira de vous inscrire et d'ajouter de nouveaux lieux via votre espace membre. <br> On pense à vous : bientôt la possibilité de créer des évènements et d'en discuter grâce au chat.</p>
+				</div>
+
+				</div>
+
+			</div>
+
+			<hr
+			class="clearfix w-100 d-md-none">
+
+			<!-- Grid column -->
+			<div
+				class="col-md-3 mx-auto mt-3 mt-md-0 mb-0 mb-md-3 text-center" style="color: #ced4da">
+
+				<!-- Links -->
+				<h5>Contact</h5>
+				<hr class="color-secondary mb-4 mt-0 d-inline-block mx-auto w-60">
+
+				<ul class="fa-ul list-unstyled">
+					<li class="mb-2">
+						<span class="fa-li">
+							<i class="las la-phone"></i>
+						</span>
+						<a style="color: #ced4da" href="05 84 78 95 74">05 84 78 95 74</a>
+					</li>
+					<li class="mb-2">
+						<span class="fa-li">
+							<i class="las la-map-marker-alt"></i>
+						</span>
+						Place de l'Innnovation,
+						<br>
+						8 allée Léon Gambetta,
+						<br>
+						13001 Marseille
+					</li>
+					<li class="mb-2">
+						<span class="fa-li">
+							<i class="las la-at"></i>
+						</span>
+						<a style="color: #ced4da" href="contact@icity.fr">contact@icity.fr</a>
+					</li>
+				</ul>
+			</div>
+			<!-- Grid column -->
+
+		</div>
+		<!-- Grid row -->
+
+		<!-- Copyright -->
+		<div class=" text-center text-white d-flex flex-column-reverse">
+			<p >© 2020 Copyright</p>
+			<a style="padding-top:1em;" class="text-primary text-white" href="{{ path('index') }}">
+				<img class="mb-3 logo-down" src="{{asset('images/logo_petit.png')}}" alt="">
+			</a>
+
+		</div>
+
+
+	</div>
+</footer>
