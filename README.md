@@ -20,9 +20,6 @@ HTML, CSS, Bootstrap, JS, Ajax, Twig, Symfony, MySQL, Leaflet/OpenStreetMap (car
 - Créer un chat autour des évènements, de l’interaction avec les utilisateurs (système de notation par like 👍 notamment)
 - Améliorer l'UI/UX
 
-## Visualisation
-[Visualiser le site](https://icity.app-idev.com/)
-
 
 ## Auteurs / Contributeurs
 [<img src="https://github.com/LSS-commits.png" width="60px;"/>](https://github.com/LSS-commits)
